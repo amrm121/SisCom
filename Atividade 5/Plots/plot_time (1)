@@ -1,0 +1,10 @@
+#Tempo
+set xlabel "Etiquetas"
+set terminal wxt size 800,800
+set grid
+set key left top
+set terminal wxt 4
+set logscale y
+set ylabel "Tempo"
+set title "Tempo de Execução"
+plot "LowerBound.txt" using 1:5 title "Lower Bound" smooth unique with linespoints pt 2,"Schoute.txt" using 1:5 title "Schoute" smooth unique with linespoints pt 4, "EomLee.txt" using 1:5 title "Eom-Lee" smooth unique with linespoints pt 6, "AlgoritmoQ.txt" using 1:5 title "Algoritmo Q" smooth unique with linespoints pt 8, "Chen.txt" using 1:5 title "Chen" smooth unique with linespoints pt 12 lt rgb "red", "Vahedi.txt" using 1:5 title "Vahedi" smooth unique with linespoints pt 14

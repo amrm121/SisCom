@@ -1,0 +1,11 @@
+set xlabel "Etiquetas"
+set terminal wxt size 800,800
+set grid
+
+#Total de Slots Vazios
+set terminal wxt 2
+set ylabel "Numero de Slots Vazios"
+set title "Total de Slots Vazios"
+set yrange [0:1100]
+set ytics 100
+plot "LowerBound.txt" using 1:3 title "Lower Bound" smooth unique with linespoints pt 2,"Schoute.txt" using 1:3 title "Schoute" smooth unique with linespoints pt 4, "EomLee.txt" using 1:3 title "Eom-Lee" smooth unique with linespoints pt 6, "AlgoritmoQ.txt" using 1:3 title "Algoritmo Q" smooth unique with linespoints pt 8
