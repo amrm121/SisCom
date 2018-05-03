@@ -91,8 +91,8 @@ public class Simulador{
 					sv = 0; //reseta numeros de slots vazios pra cada iteracao do simulador
 				}
 			}
-			long endTime = System.currentTimeMillis();
-			long totalTime = endTime - startTime;
+			long tTime = (System.currentTimeMillis() - startTime);
+			double totalTime = (double)tTime/1000;
 			if(incremented == 10) {writer.write("T:"+(incremented * increment) + " S:" + slotsTotal/repetitions + " V:" + totalV/repetitions + " C:" + totalC/repetitions + " t:" + totalTime);}
 			else {
 				writer.write("T:"+(incremented * increment) + " S:" + slotsTotal/repetitions + " V:" + totalV/repetitions + " C:" + totalC/repetitions + " t:" + totalTime +"\n");
