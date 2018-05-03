@@ -18,7 +18,7 @@ public class Simulador{
 			output = "LowerBound.txt";
 			break;
 		case 2:
-			output = "Shoute.txt";
+			output = "Schoute.txt";
 			break;
 		case 3:
 			output = "EomLee.txt";
