@@ -21,12 +21,12 @@ public class Sim_Plot extends ApplicationFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public Sim_Plot(String title, int frame, int incre, int k, boolean check, int algo) throws FileNotFoundException, IOException { //algo 1 - lower / 2 - schout / 3 - eom
+	public Sim_Plot(String title, int frame, int incre, int k, boolean check, int algo) throws FileNotFoundException, IOException { //algo 1 - lower / 2 - eom
 		super(title);
 		final XYSeriesCollection data = new XYSeriesCollection(null);
 		String type = null;
 		if(check) {
-			for(int i = 1; i < 4; i++) {
+			for(int i = 1; i < 3; i++) {
 				Simulador sim = new Simulador(i, frame, incre);
 				sim.Simulation();
 				final XYSeries serie = new XYSeries(sim.getAlgo().substring(0, sim.getAlgo().indexOf(".")));
@@ -58,7 +58,11 @@ public class Sim_Plot extends ApplicationFrame{
 						break;
 					case 4:
 						serie.add(tags, time);
-						if(type == null)type = "Tempo de Simulacao";
+						if(type == null)type = "Tempo de Simulacao (s)";
+						break;
+					case 5:
+						serie.add(tags, (double)tags/slots);
+						if(type == null)type = "Eficiencia (sucesso/slots)";
 						break;
 					}
 				}
@@ -75,13 +79,13 @@ public class Sim_Plot extends ApplicationFrame{
 			while((line = br.readLine()) != null) {
 				int tags = Integer.parseInt(line.substring(line.indexOf("T")+2, line.indexOf(" ")));
 				line = line.substring(line.indexOf(" ")+1);
-				int slots = Integer.parseInt(line.substring(line.indexOf("S")+2, line.indexOf(" "))); //k = 1
+				int slots = Integer.parseInt(line.substring(line.indexOf("S")+2, line.indexOf(" ")));
 				line = line.substring(line.indexOf(" ")+1);
-				int vazio = Integer.parseInt(line.substring(line.indexOf("V")+2, line.indexOf(" "))); //k = 2
+				int vazio = Integer.parseInt(line.substring(line.indexOf("V")+2, line.indexOf(" "))); 
 				line = line.substring(line.indexOf(" ")+1);
-				int collis = Integer.parseInt(line.substring(line.indexOf("C")+2, line.indexOf(" ")));//k = 3
+				int collis = Integer.parseInt(line.substring(line.indexOf("C")+2, line.indexOf(" ")));
 				line = line.substring(line.indexOf(" ")+1);
-				double time = Double.parseDouble(line.substring(line.indexOf("t")+2));//k = 4
+				double time = Double.parseDouble(line.substring(line.indexOf("t")+2));
 				switch(k) {
 				case 1:
 					serie.add(tags, slots);
@@ -97,7 +101,11 @@ public class Sim_Plot extends ApplicationFrame{
 					break;
 				case 4:
 					serie.add(tags, time);
-					if(type == null)type = "Tempo de Simulacao";
+					if(type == null)type = "Tempo de Simulacao (s)";
+					break;
+				case 5:
+					serie.add(tags, (double)tags/slots);
+					if(type == null)type = "Eficiencia (sucesso/slots)";
 					break;
 				}
 			}
@@ -121,7 +129,7 @@ public class Sim_Plot extends ApplicationFrame{
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		final Sim_Plot lower = new Sim_Plot("Grafico", 64, 200, 3, true, 1); //1 = SlotsPerFrame / 2 = SlotsVazios / 3 = SlotsEmColisao / 4 = TempoDeSim
+		final Sim_Plot lower = new Sim_Plot("Grafico", 64, 100, 5, true, 1); //1 = SlotsPerFrame / 2 = SlotsVazios / 3 = SlotsEmColisao / 4 = TempoDeSim / 5 = eficiencia
 	    lower.pack();						//Titulo, FrameInicial, Incremento, GraphType, true = allAlgot/false ->, algoType, 
 	    RefineryUtilities.centerFrameOnScreen(lower);
 	    lower.setVisible(true);
