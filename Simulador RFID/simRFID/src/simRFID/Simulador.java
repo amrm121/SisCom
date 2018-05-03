@@ -55,14 +55,18 @@ public class Simulador{
 							sv++; 
 						}
 					}
-					unreadTags -= ss; //diminui o numero total de tags a ser lida de acordo com slots de sucesso
-					tC += sc; // acumula numero total de colisoes numa simulacao
-					tV += sv; // acumula numero total de slots vazios numa simulacao
-					tS += frameSize; // acumula numero total de slots em uma dada simulacao
+					unreadTags -= ss; //as tags nao lidas agora, sao decrementadas das tags lidas com sucesso, seria o fato do leitor "silenciar" a tag
+					
+					//att as var globais para fins de calculo da media das 2000 simulacoes
+					tC += sc;  
+					tV += sv; 
+					tS += frameSize; 
+					
+					
 					if (sel == 1){ //lowerbound
 						frameSize = sc *2; 
 					}
-					else if (sel == 2){ //eom lee
+					else if (sel == 2){ //eom
 						double bk, ek, yk, ydif;
 						double y0 = 2.0;
 						int f;
@@ -77,9 +81,12 @@ public class Simulador{
 						f = (int) Math.ceil(yk * sc);
 						frameSize = f;
 					}
-					sc = 0; //reseta numeros de colisoes pra cada iteracao do simulador
-					ss = 0; //reseta numeros de sucessos pra cada iteracao do simulador
-					sv = 0; //reseta numeros de slots vazios pra cada iteracao do simulador
+					
+					//redefinindo as variaveis de cada simulacao
+					sc = 0; 
+					ss = 0; 
+					sv = 0; 
+					
 				}
 			}
 			long tTime = (System.currentTimeMillis() - startTime);

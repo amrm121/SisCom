@@ -70,7 +70,7 @@ public class Sim_Plot extends ApplicationFrame{
 				data.addSeries(serie);
 			}
 		}else {
-			Simulador sim = new Simulador(algo, frame, incre);
+			Simulador sim = new Simulador(algo, frame, incre); //escolha explícita do algoritmo 1-lower bound 2-eomlee
 			sim.Simulation();
 			final XYSeries serie = new XYSeries(sim.getAlgo().substring(0, sim.getAlgo().indexOf(".")));
 			FileReader fr = new FileReader(sim.getAlgo());
@@ -129,7 +129,7 @@ public class Sim_Plot extends ApplicationFrame{
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		final Sim_Plot lower = new Sim_Plot("Grafico", 64, 100, 5, true, 1); //1 = SlotsPerFrame / 2 = SlotsVazios / 3 = SlotsEmColisao / 4 = TempoDeSim / 5 = eficiencia
+		final Sim_Plot lower = new Sim_Plot("Grafico", 64, 100, 4, true, 1); //1 = SlotsPerFrame / 2 = SlotsVazios / 3 = SlotsEmColisao / 4 = TempoDeSim / 5 = eficiencia
 	    lower.pack();						//Titulo, FrameInicial, Incremento, GraphType, true = allAlgot/false ->, algoType, 
 	    RefineryUtilities.centerFrameOnScreen(lower);
 	    lower.setVisible(true);
